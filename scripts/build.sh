@@ -53,6 +53,7 @@ if [ "${RESIGN_ALL:-0}" = "true" ]; then
     repo-add --sign --key $KEYID mikesolar.db.tar.gz ./*.pkg.tar.zst
     rm -f mikesolar.db mikesolar.files
     cp mikesolar.db.tar.gz mikesolar.db && cp mikesolar.files.tar.gz mikesolar.files
+    cp mikesolar.db.tar.gz.sig mikesolar.db.sig && cp mikesolar.files.tar.gz.sig mikesolar.files.sig
     cd - >/dev/null
     cp mikesolar.pub repo/
     rclone sync repo/ "r2:$R2_BUCKET/pacman"
@@ -98,7 +99,8 @@ done < build-list.txt
 # 发布
 if ls out/*.pkg.tar.zst >/dev/null 2>&1; then
     (cd repo/x86_64 && rm -f mikesolar.db mikesolar.files &&
-      cp mikesolar.db.tar.gz mikesolar.db && cp mikesolar.files.tar.gz mikesolar.files)
+      cp mikesolar.db.tar.gz mikesolar.db && cp mikesolar.files.tar.gz mikesolar.files &&
+      cp mikesolar.db.tar.gz.sig mikesolar.db.sig && cp mikesolar.files.tar.gz.sig mikesolar.files.sig)
     cp mikesolar.pub repo/ 2>/dev/null || true
     rclone sync repo/ "r2:$R2_BUCKET/pacman"
     echo "REPO_UPDATED"

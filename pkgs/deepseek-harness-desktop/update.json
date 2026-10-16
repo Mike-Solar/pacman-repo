@@ -1,0 +1,7 @@
+{
+ "type": "github",
+ "repo": "deepseek-ai/deepseek-harness",
+ "tag_prefix": "dsh-v",
+ "var": "_tag",
+ "pkgver_strip_dash": true
+}
