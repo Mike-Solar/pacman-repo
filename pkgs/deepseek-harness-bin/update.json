@@ -1,0 +1,5 @@
+{
+ "type": "npm",
+ "package": "@deepseek-ai/dsh",
+ "var": "_npmver"
+}

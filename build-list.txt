@@ -1,0 +1,4 @@
+deepseek-harness-bin
+dsh-tauri-desktop-bin
+mimalloc2
+naps2
