@@ -18,7 +18,7 @@ rclone sync "r2:$R2_BUCKET/pacman" repo/ || true
 
 # 已有仓库注册为本地源：AUR 包之间互相依赖时可直接装上（如 nipaplay→mimalloc2）
 if [ -f repo/x86_64/mikesolar.db ]; then
-    printf '[mikesolar-local]\nSigLevel = Never\nServer = file://%s/repo/x86_64\n' "$PWD" >> /etc/pacman.conf
+    printf '[mikesolar]\nSigLevel = Never\nServer = file://%s/repo/x86_64\n' "$PWD" >> /etc/pacman.conf
     pacman -Sy >/dev/null
 fi
 
