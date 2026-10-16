@@ -16,6 +16,12 @@ export RCLONE_CONFIG_R2_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY"
 export RCLONE_CONFIG_R2_ENDPOINT="$R2_ENDPOINT"
 rclone sync "r2:$R2_BUCKET/pacman" repo/ || true
 
+# 已有仓库注册为本地源：AUR 包之间互相依赖时可直接装上（如 nipaplay→mimalloc2）
+if [ -f repo/x86_64/mikesolar.db ]; then
+    printf '[mikesolar-local]\nSigLevel = Never\nServer = file://%s/repo/x86_64\n' "$PWD" >> /etc/pacman.conf
+    pacman -Sy >/dev/null
+fi
+
 python3 scripts/plan.py
 if [ ! -s build-list.txt ]; then
     echo "全部最新，无事发生"
@@ -27,10 +33,24 @@ while read -r pkg; do
     rm -rf /home/builder/build
     cp -r "/tmp/src/$pkg" /home/builder/build
     chown -R builder:builder /home/builder/build
-    if (cd /home/builder/build && runuser -u builder -- makepkg -s --noconfirm); then
-        cp /home/builder/build/*.pkg.tar.zst out/ 2>/dev/null || echo "NO_PKG $pkg" >> failed.txt
+    build_ok() { (cd /home/builder/build && runuser -u builder -- makepkg -s --noconfirm) 2>&1 | tee /tmp/mk.log; }
+    if ! build_ok; then
+        # PGP 签名验证失败：自动导入缺失的公钥后重试一次
+        key=$(grep -oP 'unknown public key \K[0-9A-F]+' /tmp/mk.log | head -1 || true)
+        if [ -n "$key" ]; then
+            echo "导入 PGP 公钥 $key 后重试"
+            runuser -u builder -- gpg --keyserver keyserver.ubuntu.com --recv-keys "$key" || true
+            build_ok || { echo "BUILD_FAIL $pkg" >> failed.txt; continue; }
+        else
+            echo "BUILD_FAIL $pkg" >> failed.txt; continue
+        fi
+    fi
+    if cp /home/builder/build/*.pkg.tar.zst repo/x86_64/ 2>/dev/null; then
+        cp repo/x86_64/*.pkg.tar.zst out/ 2>/dev/null || true
+        # 就地更新本地源，后续包的 AUR 依赖即可安装
+        (cd repo/x86_64 && repo-add mikesolar.db.tar.gz ./*.pkg.tar.zst) && pacman -Sy >/dev/null
     else
-        echo "BUILD_FAIL $pkg" >> failed.txt
+        echo "NO_PKG $pkg" >> failed.txt
     fi
 done < build-list.txt
 
