@@ -51,7 +51,8 @@ if [ "${RESIGN_ALL:-0}" = "true" ]; then
         [ -f "$f.sig" ] || gpg --batch --yes --detach-sign --local-user $KEYID "$f"
     done
     repo-add --sign --key $KEYID mikesolar.db.tar.gz ./*.pkg.tar.zst
-    rm -f mikesolar.db mikesolar.files
+    # repo-add 生成的 db/files 及其 .sig 都是符号链接，全部展开为实体文件
+    rm -f mikesolar.db mikesolar.files mikesolar.db.sig mikesolar.files.sig
     cp mikesolar.db.tar.gz mikesolar.db && cp mikesolar.files.tar.gz mikesolar.files
     cp mikesolar.db.tar.gz.sig mikesolar.db.sig && cp mikesolar.files.tar.gz.sig mikesolar.files.sig
     cd - >/dev/null
@@ -98,7 +99,7 @@ done < build-list.txt
 
 # 发布
 if ls out/*.pkg.tar.zst >/dev/null 2>&1; then
-    (cd repo/x86_64 && rm -f mikesolar.db mikesolar.files &&
+    (cd repo/x86_64 && rm -f mikesolar.db mikesolar.files mikesolar.db.sig mikesolar.files.sig &&
       cp mikesolar.db.tar.gz mikesolar.db && cp mikesolar.files.tar.gz mikesolar.files &&
       cp mikesolar.db.tar.gz.sig mikesolar.db.sig && cp mikesolar.files.tar.gz.sig mikesolar.files.sig)
     cp mikesolar.pub repo/ 2>/dev/null || true
