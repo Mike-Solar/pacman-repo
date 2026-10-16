@@ -46,6 +46,8 @@ jobs:
           git add versions.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: update built versions"
+            # 构建期间可能有其他提交落地，先 rebase 再推
+            git pull --rebase --autostash
             git push
           else
             echo "无版本变化"
