@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 21 * * 3"   # 每周四 05:00 CST
   workflow_dispatch:
+    inputs:
+      resign_all:
+        description: "重签全部存量包（不构建）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -28,6 +33,7 @@ jobs:
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          RESIGN_ALL: ${{ inputs.resign_all || false }}
         run: bash scripts/build.sh
 
       - name: Commit version state

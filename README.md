@@ -25,7 +25,7 @@ Server = https://pacman.rjs04.com/pacman/$arch
 
 | type | 来源 | 包 |
 |---|---|---|
-| `github` | GitHub Releases | hiddify, httpdirfs, mimalloc2, naps2, nipaplay-reload-bin, dsh-tauri-desktop-bin |
+| `github` | GitHub Releases | httpdirfs, mimalloc2, naps2, nipaplay-reload-bin, dsh-tauri-desktop-bin |
 | `npm` | npm registry | deepseek-harness-bin |
 | `vscode` | VSCode 更新 API | visual-studio-code-bin |
 | `none` | 手动维护 | kirigami2（上游停更）、pantum-universal-driver（官网无 API） |

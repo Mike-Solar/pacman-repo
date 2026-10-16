@@ -44,6 +44,22 @@ if [ -f repo/x86_64/mikesolar.db ]; then
     pacman -Sy >/dev/null
 fi
 
+# 一次性模式：重签全部存量包
+if [ "${RESIGN_ALL:-0}" = "true" ]; then
+    cd repo/x86_64
+    for f in *.pkg.tar.zst; do
+        [ -f "$f.sig" ] || gpg --batch --yes --detach-sign --local-user $KEYID "$f"
+    done
+    repo-add --sign --key $KEYID mikesolar.db.tar.gz ./*.pkg.tar.zst
+    rm -f mikesolar.db mikesolar.files
+    cp mikesolar.db.tar.gz mikesolar.db && cp mikesolar.files.tar.gz mikesolar.files
+    cd - >/dev/null
+    cp mikesolar.pub repo/
+    rclone sync repo/ "r2:$R2_BUCKET/pacman"
+    echo "RESIGNED_ALL"
+    exit 0
+fi
+
 # 上游版本检查（vendored PKGBUILD 是唯一事实来源）
 python3 scripts/update.py
 if [ ! -s build-list.txt ]; then
