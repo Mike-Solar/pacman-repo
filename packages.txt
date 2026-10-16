@@ -7,4 +7,3 @@ nipaplay-reload-bin
 pantum-universal-driver
 visual-studio-code-bin
 wps-office-cn
-wps-office-mui-zh-cn

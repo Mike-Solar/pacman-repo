@@ -1,6 +1,6 @@
 #!/bin/bash
 # 在 archlinux 容器中：检查 AUR 更新 → 构建 → 更新 repo db → 同步 R2 → 提交版本状态
-set -uo pipefail
+set -euo pipefail
 export PACKAGER="mikesolar-bot <mike@mikesolar.dev>"
 
 pacman -Syu --noconfirm --needed base-devel git python sudo rclone >/dev/null
