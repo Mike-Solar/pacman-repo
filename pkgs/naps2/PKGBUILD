@@ -2,7 +2,7 @@
 # Contributor: jthvai
 
 pkgname=naps2
-pkgver=8.5.1
+pkgver=8.6.0
 pkgrel=1
 pkgdesc="NAPS2 - Not Another PDF Scanner. Scan documents to PDF and more, as simply as possible."
 arch=("aarch64" "x86_64")

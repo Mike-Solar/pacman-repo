@@ -1,5 +1,5 @@
 pkgname=deepseek-harness-bin
-_npmver=0.2.0-rc.2
+_npmver=0.2.1-rc.2
 pkgver=0.2.0rc.2
 pkgrel=1
 pkgdesc='DeepSeek Harness CLI and agent harness'

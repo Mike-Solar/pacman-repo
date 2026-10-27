@@ -1,4 +1,7 @@
 {
- "type": "none",
- "reason": "linux patch 适配 alpha.2；上游 alpha.5 重构了打包脚本，移植后再解锁"
+ "type": "github",
+ "repo": "deepseek-ai/deepseek-harness",
+ "tag_prefix": "dsh-v",
+ "var": "_tag",
+ "pkgver_strip_dash": true
 }

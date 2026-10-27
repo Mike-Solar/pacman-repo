@@ -3,7 +3,7 @@
 pkgname=nipaplay-reload-bin
 _pkgname=NipaPlay
 _desktop_name=io.github.MCDFsteve.NipaPlay-Reload
-pkgver=1.11.9
+pkgver=1.11.10
 pkgrel=1
 pkgdesc="一个现代化的跨平台视频播放器"
 arch=('x86_64')

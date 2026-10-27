@@ -1,3 +1,6 @@
+deepseek-harness-bin
 deepseek-harness-desktop
 mimalloc2
 naps2
+nipaplay-reload-bin
+visual-studio-code-bin
