@@ -1,0 +1,58 @@
+# Maintainer: Mike Solar <iam@mikesolar.cn>
+#
+# AeroThemePlasma desktop package (Plasma shell, plasmoids, look-and-feel,
+# SDDM theme and setup wizard) built from the Simplified Chinese fork.
+#
+# The fork adds po/zh_CN catalogs for the shell, every plasmoid, the setup
+# wizard and the SDDM theme, installs them through ki18n_install(po), and
+# translates the KPlugin metadata and .desktop entries. The commit is pinned
+# so a published pkgver keeps describing exactly the same content; bump
+# _commit and pkgver together when refreshing.
+#
+# The runtime AeroShell components are AUR packages. They are required at
+# runtime, but resolved from the user's AUR setup rather than from this
+# repository, so CI builds with ci-nodeps and installs only the official
+# build dependencies listed in ci-deps.
+
+pkgname=aerothemeplasma-desktop-zh
+_commit=d97f9644c4f57defcbbfe32c546fdc30157f58e2
+pkgver=6.8.0_782.rd97f964
+pkgrel=1
+pkgdesc='AeroThemePlasma desktop shell (Windows 7 look for KDE Plasma) with Simplified Chinese localization'
+arch=('x86_64')
+url='https://github.com/Mike-Solar/aerothemeplasma'
+license=('AGPL-3.0-or-later')
+depends=(
+  'aeroshell-libplasma' 'aeroshell-workspace' 'aeroshell-kwin-components'
+  'aerothemeplasma-sounds' 'aerothemeplasma-icons' 'aeroshell-smod'
+  'qt6-virtualkeyboard' 'qt6-multimedia' 'qt6-5compat' 'qt6-wayland' 'qt6-declarative'
+  'kconfigwidgets' 'ksvg' 'wayland' 'kiconthemes' 'plasma-activities' 'kjobwidgets'
+  'kio' 'kglobalaccel' 'kpipewire' 'ki18n' 'kwin' 'plasma-workspace' 'powerdevil'
+  'kauth' 'kcmutils' 'networkmanager-qt' 'kconfig' 'kquickcharts' 'prison'
+  'knewstuff' 'kdeclarative' 'kirigami-addons' 'kcoreaddons' 'kservice' 'kxmlgui'
+  'plasma5support' 'kvantum' 'sddm' 'sddm-kcm' 'plasma-nm' 'plasma-pa'
+  'kwindowsystem' 'knotifications' 'knotifyconfig' 'kmenuedit' 'kirigami'
+  'kitemmodels' 'kpackage' 'kwidgetsaddons' 'plasma-desktop' 'qt6-base'
+)
+optdepends=(
+  'uac-polkit-agent: Windows-style UAC prompts for privilege escalation'
+  'qrca: share the Wi-Fi password as a QR code from the network applet'
+)
+makedepends=('cmake' 'extra-cmake-modules' 'gettext' 'git' 'ninja' 'plasma-wayland-protocols' 'wayland-protocols')
+provides=('aerothemeplasma-desktop' 'aerothemeplasma-desktop-git')
+conflicts=('aerothemeplasma-desktop' 'aerothemeplasma-desktop-git')
+options=('!debug')
+source=("$pkgname::git+https://github.com/Mike-Solar/aerothemeplasma.git#commit=$_commit")
+sha256sums=('SKIP')
+
+build() {
+  cmake -B build -S "$pkgname" -G Ninja \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  install -Dm644 "$pkgname/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

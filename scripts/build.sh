@@ -71,12 +71,20 @@ fi
 
 while read -r pkg; do
     echo "=== 构建 $pkg ==="
+    # 运行时依赖在 AUR（如 aeroshell-*）的包，容器里无法用 makepkg -s 解析：
+    # ci-deps 列出官方构建依赖，ci-nodeps 表示跳过依赖解析。
+    if [ -f "pkgs/$pkg/ci-deps" ]; then
+        # shellcheck disable=SC2046
+        pacman -S --noconfirm --needed --asdeps $(cat "pkgs/$pkg/ci-deps") >/dev/null
+    fi
+    extra_opts=()
+    [ -f "pkgs/$pkg/ci-nodeps" ] && extra_opts+=(--nodeps)
     rm -rf /home/builder/build
     cp -r "pkgs/$pkg" /home/builder/build
     chown -R builder:builder /home/builder/build
     # 版本变了 → 重算校验和（下载上游源码，可能需要几分钟）
     runuser -u builder -- bash -c 'cd /home/builder/build && updpkgsums' || true
-    build_ok() { (cd /home/builder/build && runuser -u builder -- makepkg -s --noconfirm --sign --key $KEYID) 2>&1 | tee /tmp/mk.log; }
+    build_ok() { (cd /home/builder/build && runuser -u builder -- makepkg -s "${extra_opts[@]}" --noconfirm --sign --key $KEYID) 2>&1 | tee /tmp/mk.log; }
     if ! build_ok; then
         # 上游 PGP 签名验证失败：自动导入缺失公钥重试一次
         key=$(grep -oP 'unknown public key \K[0-9A-F]+' /tmp/mk.log | head -1 || true)

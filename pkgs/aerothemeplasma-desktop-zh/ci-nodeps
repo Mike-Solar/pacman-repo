@@ -1,0 +1,3 @@
+AUR runtime dependencies (aeroshell-*, aerothemeplasma-icons/sounds) are not
+available inside the CI container. They are declared in depends for the
+published package, but the build only needs the official packages in ci-deps.

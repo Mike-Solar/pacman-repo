@@ -28,7 +28,7 @@ Server = https://pacman.rjs04.com/pacman/$arch
 | `github` | GitHub Releases | httpdirfs, mimalloc2, naps2, nipaplay-reload-bin |
 | `npm` | npm registry | deepseek-harness-bin |
 | `vscode` | VSCode 更新 API | visual-studio-code-bin |
-| `none` | 手动维护 | kirigami2（上游停更）、pantum-universal-driver（官网无 API）、deepseek-harness-desktop（源码构建，linux 补丁锁定 alpha.2） |
+| `none` | 手动维护 | kirigami2（上游停更）、pantum-universal-driver（官网无 API）、deepseek-harness-desktop（源码构建，linux 补丁锁定 alpha.2）、aerothemeplasma-desktop-zh（汉化分支，锁定提交） |
 
 ## 工作方式
 
@@ -37,6 +37,7 @@ Server = https://pacman.rjs04.com/pacman/$arch
 - Arch 容器中 `updpkgsums` 重算校验和 → `makepkg --sign` 构建并签名
 - `repo-add --sign` 更新 `mikesolar.db`（含 db 签名），rclone 同步到 R2
 - 触发构建的条件：上游新版、已升版未发布、从未发布
+- 运行时依赖在 AUR 的包（如 `aerothemeplasma-desktop-zh` 依赖 `aeroshell-*`）在 `pkgs/<name>/` 放 `ci-deps`（容器内需安装的官方构建依赖）与 `ci-nodeps`（跳过 `makepkg -s` 的依赖解析），AUR 依赖仍保留在 PKGBUILD 的 `depends` 中
 
 ## 说明
 

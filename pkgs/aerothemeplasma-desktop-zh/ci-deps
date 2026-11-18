@@ -1,0 +1,7 @@
+cmake ninja extra-cmake-modules gettext git
+plasma-wayland-protocols wayland-protocols layer-shell-qt vulkan-headers
+qt6-base qt6-declarative qt6-wayland qt6-5compat qt6-svg qt6-virtualkeyboard qt6-multimedia qt6-tools
+kdecoration kcolorscheme kconfig kcoreaddons kcrash kdbusaddons kglobalaccel kguiaddons ki18n
+kiconthemes kio kirigami knewstuff knotifications knotifyconfig kpackage krunner kservice ksvg
+sonnet kwidgetsaddons kwindowsystem kxmlgui kcmutils kcodecs kjobwidgets kitemmodels attica
+qqc2-desktop-style plasma-workspace plasma-desktop kwin plasma5support
