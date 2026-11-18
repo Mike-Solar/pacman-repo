@@ -6,9 +6,9 @@
 # and a serif font fallback is avoided.
 
 pkgname=linux-explorer-zh
-_commit=38bba2a1a1b7ad5df958dfc1a35b5a6a2f6c2a63
+_commit=99ed1435d9789f77d6480c39cb6e20cb551f9616
 pkgver=2.0.20261118
-pkgrel=3
+pkgrel=4
 pkgdesc='The Windows 7 Explorer recreated on Linux with KIO, with Simplified Chinese UI'
 arch=('x86_64')
 url='https://github.com/Mike-Solar/linux-explorer'
