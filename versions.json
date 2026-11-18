@@ -3,7 +3,7 @@
  "mimalloc2": "3.7.0-1",
  "naps2": "8.6.0-1",
  "pantum-universal-driver": "1.1.186-5",
- "visual-studio-code-bin": "1.146.0-1",
+ "visual-studio-code-bin": "1.147.0-1",
  "kirigami2": "5.116.0-3",
  "nipaplay-reload-bin": "1.11.11-1",
  "deepseek-harness-bin": "0.2.0rc.2-1",
@@ -13,5 +13,9 @@
  "linux-explorer-zh": "2.0.20261118-5",
  "linux-minesweeper-zh": "2.0.1.20261118-3",
  "linux-control-zh": "1.0.20261118-3",
- "linux-devmgmt-zh": "2.1.1.20261118-3"
+ "linux-devmgmt-zh": "2.1.1.20261118-3",
+ "aeroshell-kwin-components-git": "6.8.3_77.r4a28963-1",
+ "aeroshell-libplasma-git": "6.8.3-1",
+ "aeroshell-smod-git": "6.8.3_78.r67e24c0-1",
+ "aeroshell-workspace-git": "6.8.3_29.rabb45d8-1"
 }
