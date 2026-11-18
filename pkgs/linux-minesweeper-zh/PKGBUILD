@@ -6,7 +6,7 @@
 
 pkgname=linux-minesweeper-zh
 _commit=7d29d2507e5723485a600fee8d199eb1b7bf0225
-pkgver=2.0.1.r7d29d25
+pkgver=2.0.1.20261118
 pkgrel=1
 pkgdesc='A faithful recreation of the Windows 7 Minesweeper, with Simplified Chinese UI'
 arch=('x86_64')

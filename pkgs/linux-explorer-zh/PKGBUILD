@@ -7,7 +7,7 @@
 
 pkgname=linux-explorer-zh
 _commit=38bba2a1a1b7ad5df958dfc1a35b5a6a2f6c2a63
-pkgver=2.0.r38bba2a
+pkgver=2.0.20261118
 pkgrel=1
 pkgdesc='The Windows 7 Explorer recreated on Linux with KIO, with Simplified Chinese UI'
 arch=('x86_64')

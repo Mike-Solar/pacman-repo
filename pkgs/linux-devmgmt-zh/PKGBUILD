@@ -6,7 +6,7 @@
 
 pkgname=linux-devmgmt-zh
 _commit=ba7cd5183727f4828b27048ff502f16b5fee0289
-pkgver=2.1.1.rba7cd51
+pkgver=2.1.1.20261118
 pkgrel=1
 pkgdesc='A faithful recreation of the Windows 7 Device Manager, with Simplified Chinese UI'
 arch=('x86_64')
