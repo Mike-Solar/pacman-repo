@@ -7,7 +7,7 @@
 pkgname=linux-control-zh
 _commit=8ed7889005c36882fe154f592212234ee23703e0
 pkgver=1.0.20261118
-pkgrel=2
+pkgrel=3
 pkgdesc='A faithful recreation of the Windows 7 Control Panel, with Simplified Chinese UI'
 arch=('x86_64')
 url='https://github.com/Mike-Solar/linux-control'

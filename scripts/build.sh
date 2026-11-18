@@ -97,8 +97,14 @@ while read -r pkg; do
         fi
     fi
     if cp /home/builder/build/*.pkg.tar.zst /home/builder/build/*.sig repo/x86_64/ 2>/dev/null; then
-        # 就地更新本地源并签名 db，后续包的依赖即可安装
-        (cd repo/x86_64 && repo-add --sign --key $KEYID mikesolar.db.tar.gz ./*.pkg.tar.zst) && pacman -Sy >/dev/null
+        # 就地更新本地源并签名 db，后续包的依赖即可安装。
+        # 只把本次新构建的包交给 repo-add：repo/x86_64 里可能还留着同名的旧版本，
+        # 把旧包一起传进去会让 db 条目被旧版本覆盖（repo-add 按通配符顺序处理）。
+        new_pkgs=()
+        for f in /home/builder/build/*.pkg.tar.zst; do
+            new_pkgs+=("$(basename "$f")")
+        done
+        (cd repo/x86_64 && repo-add --sign --key $KEYID mikesolar.db.tar.gz "${new_pkgs[@]}") && pacman -Sy >/dev/null
         cp /home/builder/build/*.pkg.tar.zst out/ 2>/dev/null || true
     else
         echo "NO_PKG $pkg" >> failed.txt
