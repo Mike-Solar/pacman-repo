@@ -8,13 +8,13 @@
 pkgname=linux-explorer-zh
 _commit=38bba2a1a1b7ad5df958dfc1a35b5a6a2f6c2a63
 pkgver=2.0.20261118
-pkgrel=1
+pkgrel=2
 pkgdesc='The Windows 7 Explorer recreated on Linux with KIO, with Simplified Chinese UI'
 arch=('x86_64')
 url='https://github.com/Mike-Solar/linux-explorer'
 license=('GPL-3.0-only')
 depends=(
-  'qt6-base' 'qt6-multimedia' 'kio' 'kcoreaddons' 'kconfig' 'kwidgetsaddons'
+  'frameworkintegration' 'qt6-base' 'qt6-multimedia' 'kio' 'kcoreaddons' 'kconfig' 'kwidgetsaddons'
   'kwindowsystem' 'solid' 'libaero-qt' 'libcups' 'openssl' 'zlib'
 )
 optdepends=(

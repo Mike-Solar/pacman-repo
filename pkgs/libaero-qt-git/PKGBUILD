@@ -4,13 +4,13 @@
 
 pkgname=libaero-qt-git
 pkgver=r112.7de22e7
-pkgrel=1
+pkgrel=2
 pkgdesc='A library of reusable Aero-style widget components (QtWidgets and QML)'
 arch=('x86_64')
 url='https://gitgud.io/atmk/libaero-qt'
 license=('unknown')
 depends=(
-  'qt6-base' 'kwidgetsaddons' 'kwindowsystem' 'kcoreaddons' 'kcompletion' 'kio' 'kconfig'
+  'frameworkintegration' 'qt6-base' 'kwidgetsaddons' 'kwindowsystem' 'kcoreaddons' 'kcompletion' 'kio' 'kconfig'
 )
 makedepends=('git' 'cmake' 'extra-cmake-modules' 'qt6-tools')
 options=('strip' '!debug')
