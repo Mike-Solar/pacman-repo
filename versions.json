@@ -8,5 +8,8 @@
  "nipaplay-reload-bin": "1.11.11-1",
  "deepseek-harness-bin": "0.2.0rc.2-1",
  "deepseek-harness-desktop": "0.2.1rc.3-1",
- "aerothemeplasma-desktop-zh": "6.8.0_783.re0d1285-1"
+ "aerothemeplasma-desktop-zh": "6.8.0_784.rd22a41f-1",
+ "libaero-qt-git": "r112.7de22e7-1",
+ "linux-explorer-zh": "2.0.rf8ae032-1",
+ "linux-minesweeper-zh": "2.0.1.r7d29d25-1"
 }
