@@ -17,7 +17,7 @@
 pkgname=aerothemeplasma-desktop-zh
 _commit=103205a723d8a460b4fc0405aa4c3a858d39fda8
 pkgver=6.8.0_785.r103205a
-pkgrel=1
+pkgrel=2
 pkgdesc='AeroThemePlasma desktop shell (Windows 7 look for KDE Plasma) with Simplified Chinese localization'
 arch=('x86_64')
 url='https://github.com/Mike-Solar/aerothemeplasma'
@@ -47,8 +47,12 @@ source=("$pkgname::git+https://github.com/Mike-Solar/aerothemeplasma.git#commit=
 sha256sums=('SKIP')
 
 build() {
+  # Keep the KDE/Arch libexec layout (/usr/lib, not /usr/libexec): the
+  # session launcher hardcodes ${CMAKE_INSTALL_FULL_LIBEXECDIR} for
+  # plasma-dbus-run-session-if-needed, which Arch installs in /usr/lib.
   cmake -B build -S "$pkgname" -G Ninja \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
   cmake --build build
 }
