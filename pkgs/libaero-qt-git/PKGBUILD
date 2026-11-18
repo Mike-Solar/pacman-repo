@@ -1,0 +1,42 @@
+# Maintainer: Aster O'Connor <archlinux dot anatomist477 at passmail dot net>
+# Vendored from the AUR and pinned, so the AeroThemePlasma companion packages
+# can build against a fixed libaero-qt.
+
+pkgname=libaero-qt-git
+pkgver=r112.7de22e7
+pkgrel=1
+pkgdesc='A library of reusable Aero-style widget components (QtWidgets and QML)'
+arch=('x86_64')
+url='https://gitgud.io/atmk/libaero-qt'
+license=('unknown')
+depends=(
+  'qt6-base' 'kwidgetsaddons' 'kwindowsystem' 'kcoreaddons' 'kcompletion' 'kio' 'kconfig'
+)
+makedepends=('git' 'cmake' 'extra-cmake-modules' 'qt6-tools')
+options=('strip' '!debug')
+provides=('libaero-qt')
+conflicts=('libaero-qt')
+source=(
+  "${pkgname}::git+https://gitgud.io/atmk/libaero-qt.git#commit=7de22e712f52db37f0061f485976c2a3d6bacd0e"
+  "slidingstackedwidget::git+https://github.com/Qt-Widgets/SlidingStackedWidget-1.git"
+)
+sha256sums=('SKIP' 'SKIP')
+
+prepare() {
+  cd "$pkgname"
+
+  git submodule init deps/slidingstackedwidget
+  git config submodule.deps/slidingstackedwidget.url "$srcdir/slidingstackedwidget"
+  git -c protocol.file.allow=always submodule update deps/slidingstackedwidget
+}
+
+build() {
+  cmake -B build -G Ninja -S "$pkgname" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}

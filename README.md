@@ -28,7 +28,7 @@ Server = https://pacman.rjs04.com/pacman/$arch
 | `github` | GitHub Releases | httpdirfs, mimalloc2, naps2, nipaplay-reload-bin |
 | `npm` | npm registry | deepseek-harness-bin |
 | `vscode` | VSCode 更新 API | visual-studio-code-bin |
-| `none` | 手动维护 | kirigami2（上游停更）、pantum-universal-driver（官网无 API）、deepseek-harness-desktop（源码构建，linux 补丁锁定 alpha.2）、aerothemeplasma-desktop-zh（汉化分支，锁定提交） |
+| `none` | 手动维护 | linux-explorer-zh、linux-minesweeper-zh、linux-devmgmt-zh、linux-control-zh（汉化分支，锁定提交）、libaero-qt-git（固定提交，供上述程序构建）、 kirigami2（上游停更）、pantum-universal-driver（官网无 API）、deepseek-harness-desktop（源码构建，linux 补丁锁定 alpha.2）、aerothemeplasma-desktop-zh（汉化分支，锁定提交） |
 
 ## 工作方式
 

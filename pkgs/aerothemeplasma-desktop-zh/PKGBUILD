@@ -15,8 +15,8 @@
 # build dependencies listed in ci-deps.
 
 pkgname=aerothemeplasma-desktop-zh
-_commit=e0d1285bd08fa474de7c957a2c52f2694744b0d8
-pkgver=6.8.0_783.re0d1285
+_commit=d22a41fc85741941d170b36c1567d9318580c1d9
+pkgver=6.8.0_784.rd22a41f
 pkgrel=1
 pkgdesc='AeroThemePlasma desktop shell (Windows 7 look for KDE Plasma) with Simplified Chinese localization'
 arch=('x86_64')

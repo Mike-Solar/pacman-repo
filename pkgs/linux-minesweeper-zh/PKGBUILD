@@ -1,0 +1,32 @@
+# Maintainer: Mike Solar <iam@mikesolar.cn>
+#
+# Windows 7 Minesweeper recreation with a Simplified Chinese UI.
+# Built from the Mike-Solar fork (translations/zh_CN.ts compiled to .qm and
+# loaded at runtime); the upstream sources are unchanged otherwise.
+
+pkgname=linux-minesweeper-zh
+_commit=7d29d2507e5723485a600fee8d199eb1b7bf0225
+pkgver=2.0.1.r7d29d25
+pkgrel=1
+pkgdesc='A faithful recreation of the Windows 7 Minesweeper, with Simplified Chinese UI'
+arch=('x86_64')
+url='https://github.com/Mike-Solar/linux-minesweeper'
+license=('GPL-3.0-only')
+depends=('qt6-base' 'qt6-multimedia')
+makedepends=('cmake' 'ninja')
+provides=('linux-minesweeper')
+conflicts=('linux-minesweeper')
+source=("$pkgname::git+https://github.com/Mike-Solar/linux-minesweeper.git#commit=$_commit")
+sha256sums=('SKIP')
+
+build() {
+  cmake -S "$pkgname" -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  install -Dm644 "$pkgname/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
