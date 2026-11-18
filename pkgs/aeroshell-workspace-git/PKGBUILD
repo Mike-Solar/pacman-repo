@@ -1,0 +1,30 @@
+# Maintainer: WackyIdeas <wackyideas@disroot.org>
+# Rebuilt against Plasma 6.8.3.
+
+pkgname=aeroshell-workspace-git
+pkgver=6.8.3_29.rabb45d8
+pkgrel=1
+pkgdesc='Various components required by AeroShell-based desktops (Plasma 6.8.3 rebuild)'
+arch=('x86_64')
+url='https://github.com/aeroshell-desktop/aeroshell-workspace'
+license=('AGPL-3.0-or-later')
+depends=(
+  'gcc-libs' 'glibc' 'kconfig' 'kcmutils' 'aeroshell-libplasma' 'sddm'
+  'libksysguard' 'plasma-workspace' 'qt6-declarative' 'kjobwidgets'
+  'plasma-activities-stats' 'ki18n' 'kcoreaddons' 'kwindowsystem' 'kservice' 'kio' 'qt6-base'
+)
+makedepends=('git' 'extra-cmake-modules' 'cmake' 'ninja')
+conflicts=('aeroshell-workspace')
+provides=('aeroshell-workspace')
+options=('!debug')
+source=("$pkgname::git+https://github.com/aeroshell-desktop/aeroshell-workspace.git#commit=abb45d8d00e128e2cb85ec608161ad498abd3a20")
+sha256sums=('SKIP')
+
+build() {
+  cmake -B build -S "$pkgname" -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}

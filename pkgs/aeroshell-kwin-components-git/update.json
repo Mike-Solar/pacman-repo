@@ -1,0 +1,4 @@
+{
+ "type": "none",
+ "reason": "rebuilt against Plasma/KWin 6.8.3; bump pkgver manually"
+}

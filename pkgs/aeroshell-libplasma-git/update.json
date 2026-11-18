@@ -1,0 +1,4 @@
+{
+ "type": "none",
+ "reason": "AeroShell patches rebased onto upstream Plasma 6.8.3; bump pkgver manually"
+}

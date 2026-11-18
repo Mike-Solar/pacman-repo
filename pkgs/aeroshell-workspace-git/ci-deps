@@ -1,0 +1,1 @@
+gcc-libs glibc kconfig kcmutils sddm libksysguard plasma-workspace qt6-declarative kjobwidgets plasma-activities-stats ki18n kcoreaddons kwindowsystem kservice kio qt6-base git extra-cmake-modules cmake ninja

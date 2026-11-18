@@ -1,0 +1,45 @@
+# Maintainer: WackyIdeas <wackyideas@disroot.org>
+# Rebased on Plasma 6.8.3 for compatibility with the current KWin/Plasma
+# packages: upstream libplasma 6.8.3 plus the AeroShell patches
+# (PlasmaQuick::Dialog shadows, tooltip and window patches).
+
+pkgname=aeroshell-libplasma-git
+pkgver=6.8.3
+pkgrel=1
+pkgdesc='Plasma library and runtime components, with AeroShell patches (Plasma 6.8.3)'
+arch=('x86_64')
+url='https://gitgud.io/aeroshell/libplasma'
+license=('LGPL-2.0-or-later')
+depends=(
+  'gcc-libs' 'glibc' 'plasma-activities' 'kcolorscheme' 'kconfig' 'kcoreaddons'
+  'kglobalaccel' 'kguiaddons' 'ki18n' 'kiconthemes' 'kio' 'kirigami'
+  'knotifications' 'kpackage' 'ksvg' 'kwidgetsaddons' 'kwindowsystem' 'libglvnd'
+  'libx11' 'libxcb' 'qt6-5compat' 'qt6-base' 'qt6-declarative' 'wayland'
+)
+makedepends=('git' 'extra-cmake-modules' 'kdoctools' 'wayland-protocols' 'plasma-wayland-protocols')
+conflicts=('plasma-framework' 'libplasma' 'aeroshell-libplasma')
+replaces=('plasma-framework')
+provides=('libplasma' 'aeroshell-libplasma')
+options=('!debug')
+source=(
+  "libplasma-$pkgver.tar.xz::https://download.kde.org/stable/plasma/$pkgver/libplasma-$pkgver.tar.xz"
+  'aeroshell-libplasma-6.8.3.patch'
+)
+sha256sums=(
+  '76f081f2d96c7dccf1f29fa0a301572d0115b0c5bec1b32ede0fea4a45c254c4'
+  'd7225d5651df704bd338b9f79781905a1976e71d4f8513bcbe37411affd96bc2'
+)
+
+prepare() {
+  cd "libplasma-$pkgver"
+  patch -Np1 -i "$srcdir/aeroshell-libplasma-6.8.3.patch"
+}
+
+build() {
+  cmake -B build -S "libplasma-$pkgver" -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}

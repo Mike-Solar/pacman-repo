@@ -1,0 +1,1 @@
+gcc-libs glibc kconfig kwin kdecoration kcoreaddons libepoxy ki18n kcmutils kguiaddons plasma-wayland-protocols wayland wayland-protocols qt6-wayland kwindowsystem kwidgetsaddons pkgconf qt6-base git extra-cmake-modules kdoctools vulkan-headers cmake ninja
