@@ -44,3 +44,23 @@ Server = https://pacman.rjs04.com/pacman/$arch
 - S3/R2 不支持符号链接，`mikesolar.db` / `mikesolar.files` 是实体副本
 - 签名密钥：ed25519，指纹 `039997D802A98F156F2F501262D63E707B5BA921`，公钥在 `mikesolar.pub`
 - 同一 bucket 还托管 Flatpak 源（`repo/` 前缀，见 flatpak.rjs04.com）
+
+## 汉化包
+
+以下包基于上游源码的汉化分支（提交锁定），界面为简体中文，并替换同名 AUR 包：
+
+| 包 | 说明 | 冲突/提供 |
+|---|---|---|
+| `aerothemeplasma-desktop-zh` | AeroThemePlasma 桌面（Plasma 外壳、小部件、SDDM、设置向导）汉化版 | 取代 `aerothemeplasma-desktop{-git}` |
+| `linux-explorer-zh` | Windows 7 资源管理器复刻汉化版（含控制面板） | 取代 `linux-explorer`、`linux-control` |
+| `linux-minesweeper-zh` | Windows 7 扫雷复刻汉化版 | 取代 `linux-minesweeper` |
+| `linux-devmgmt-zh` | Windows 7 设备管理器复刻汉化版 | 取代 `linux-devmgmt` |
+| `linux-control-zh` | 独立控制面板复刻汉化版 | 与 `linux-explorer-zh` 冲突（二选一） |
+| `libaero-qt-git` | 上述程序所需的 Aero 风格 Qt 组件库 | 取代 `libaero-qt` |
+
+`aerothemeplasma-desktop-zh` 的运行时依赖是 AUR 中的 `aeroshell-*` 组件，请先装好 AUR 包再安装本包。
+
+```bash
+sudo pacman -Sy
+sudo pacman -S aerothemeplasma-desktop-zh linux-explorer-zh linux-minesweeper-zh linux-devmgmt-zh
+```
