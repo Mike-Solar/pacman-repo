@@ -15,8 +15,8 @@
 # build dependencies listed in ci-deps.
 
 pkgname=aerothemeplasma-desktop-zh
-_commit=d97f9644c4f57defcbbfe32c546fdc30157f58e2
-pkgver=6.8.0_782.rd97f964
+_commit=e0d1285bd08fa474de7c957a2c52f2694744b0d8
+pkgver=6.8.0_783.re0d1285
 pkgrel=1
 pkgdesc='AeroThemePlasma desktop shell (Windows 7 look for KDE Plasma) with Simplified Chinese localization'
 arch=('x86_64')
@@ -35,6 +35,7 @@ depends=(
   'kitemmodels' 'kpackage' 'kwidgetsaddons' 'plasma-desktop' 'qt6-base'
 )
 optdepends=(
+  'plasma-systemmonitor: Task Manager action in the start menu and taskbar menus'
   'uac-polkit-agent: Windows-style UAC prompts for privilege escalation'
   'qrca: share the Wi-Fi password as a QR code from the network applet'
 )
